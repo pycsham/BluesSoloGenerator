@@ -47,6 +47,8 @@ class CFG:
     # recursive function that generates a string of terminals
     # this is used for generating the skeleton
     def generateSkeleton(self, n):
+        if n == 0:
+            return []
         if n == 1:
             return ["Q1"]
         if n == 2:

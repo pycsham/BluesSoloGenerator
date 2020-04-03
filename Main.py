@@ -1,4 +1,5 @@
 from CFG import CFG
+from MusicGeneration import BluesMusicGeneration
 
 
 def main():
@@ -53,6 +54,12 @@ def main():
     # Then Generate the sequence of rhythms and notes
     termSequence = BlueSoloCFG.generate(skeleton)
     print(termSequence)
+    
+    # Mapping each terminal in the generated seuqnece to a stream of notes
+    generateMusic = BluesMusicGeneration(termSequence)
+    filename = "default.midi"
+    generateMusic.generate(filename)
+
 
     
 
