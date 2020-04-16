@@ -21,30 +21,6 @@ class BluesMusicGeneration:
         self.octave = random.randint(1,7)
         self.newScale = random.choice(["A", "C", "A+C"])
         self.newNote = random.randint(0, len(self.bluesScale[self.newScale]))
-
-        
-        # self.chordsMap = {
-        #     1: 'C3 E3 G3 A#3',
-        #     4: 'C3 D#3 F3 A3',
-        #     5: 'D3 F3 G3 B3'
-        # }
-
-        # for c in self.chordSequence:
-        #     chordNotes = self.chordsMap[c]
-        #     for i in range(2):
-        #         duration = music21.duration.Duration(2.0)
-        #         chord = music21.chord.Chord(chordNotes, duration=duration)
-        #         self.pianoChordsTrack.append(chord)
-
-        #         duration1 = music21.duration.Duration(1.5)
-        #         duration2 = music21.duration.Duration(0.5)
-        #         chord1 = music21.chord.Chord(chordNotes, duration=duration1)
-        #         chord2 = music21.chord.Chord(chordNotes, duration=duration2)
-        #         self.guitarChordsTrack.append(chord1)
-        #         self.guitarChordsTrack.append(chord2)
-        
-        # fp = self.pianoChordsTrack.write('midi', fp="./results/pianoChordsTrack.midi")
-        # fg = self.guitarChordsTrack.write('midi', fp="./results/guitarChordsTrack.midi")
        
 
         # Mapping the rhythm to duration, using the convention in music21
@@ -99,22 +75,28 @@ class BluesMusicGeneration:
 
             
 
+    def generateBackingTrack(self):
+        self.chordsMap = {
+            1: 'C3 E3 G3 A#3',
+            4: 'C3 D#3 F3 A3',
+            5: 'D3 F3 G3 B3'
+        }
+        for c in self.chordSequence:
+            chordNotes = self.chordsMap[c]
+            for i in range(2):
+                duration = music21.duration.Duration(2.0)
+                chord = music21.chord.Chord(chordNotes, duration=duration)
+                self.pianoChordsTrack.append(chord)
 
-    # Maps the sequence into a stream of notes 
-    # Simply using the rhythmic skeleton for now
-    # Rules:
-    # 1. Going up or down the blues scale 
-    # 2. When to decide a new "direction":
-    #    A rest
-    #    Bounds of keys
-    #    Chord change
-    #    Repeated triplets could play the same sequence 
-    #    After a longer note (a 2 or 1)
-    # 3. A new direction: 
-    #    randomly choose a new octave (from the one above, below and the same one)
-    #    choose the note on the blues scale to start on 
-    
-
+                duration1 = music21.duration.Duration(1.5)
+                duration2 = music21.duration.Duration(0.5)
+                chord1 = music21.chord.Chord(chordNotes, duration=duration1)
+                chord2 = music21.chord.Chord(chordNotes, duration=duration2)
+                self.guitarChordsTrack.append(chord1)
+                self.guitarChordsTrack.append(chord2)
+        
+        fp = self.pianoChordsTrack.write('midi', fp="./results/pianoChordsTrack.midi")
+        fg = self.guitarChordsTrack.write('midi', fp="./results/guitarChordsTrack.midi")
 
     def switchDirection(self):
         print("direction switched")
@@ -136,7 +118,19 @@ class BluesMusicGeneration:
         self.newScale = random.choice(["A", "C", "A+C"])
         self.newNote = random.randint(0,len(self.bluesScale[self.newScale])-1)
 
-
+    # Maps the sequence into a stream of notes 
+    # Simply using the rhythmic skeleton for now
+    # Rules:
+    # 1. Going up or down the blues scale 
+    # 2. When to decide a new "direction":
+    #    A rest
+    #    Bounds of keys
+    #    Chord change
+    #    Repeated triplets could play the same sequence 
+    #    After a longer note (a 2 or 1)
+    # 3. A new direction: 
+    #    randomly choose a new octave (from the one above, below and the same one)
+    #    choose the note on the blues scale to start on 
     def generate(self, filename):
         for index, bar in enumerate(self.barSequence):
             # Switching directions if there is a chord change
