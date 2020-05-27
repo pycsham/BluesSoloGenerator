@@ -4,8 +4,14 @@ Using a probabilistic CFG to generate a 12 bars blues solo
 Uses the probablistic CFG from the following paper: A Grammatical Approach to Automatic Improvisation by Robert M. Keller and David R. Morrison
 
 # How to Run
-type in the following in the command line: python3 Main.py
-Current outpu: prints out the generated sequence of terminal symbols
+Command line: python Main.py
+
+Output: outputs a default.midi file in the results folder 
+
+Sugggestion: use garage band to convert midi file into an mp3 file if your machine does not support a MIDI player
 
 # Dependencies
 music21 
+
+# Research report
+See all reports in the report folder
