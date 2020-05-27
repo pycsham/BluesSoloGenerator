@@ -14,4 +14,4 @@ Sugggestion: use garage band to convert midi file into an mp3 file if your machi
 music21 
 
 # Research report
-See report.pdf in repository
+See all reports in the report folder
