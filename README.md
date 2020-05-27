@@ -12,3 +12,6 @@ Sugggestion: use garage band to convert midi file into an mp3 file if your machi
 
 # Dependencies
 music21 
+
+# Research report
+See report.pdf in repository
